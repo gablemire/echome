@@ -1,0 +1,29 @@
+helmRepos:
+  kubernetes-dashboard: https://kubernetes.github.io/dashboard/
+
+namespaces:
+  default:
+  stg:
+  prd:
+
+apps:
+  echome-stg:
+    namespace: stg
+    enabled: true
+    chart: ../2-helm/echome
+    version: "0.1.0"
+    valuesFile: "../2-helm/stg.yaml"
+  echome-prd:
+    namespace: prd
+    enabled: true
+    chart: ../2-helm/echome
+    version: "0.1.0"
+    valuesFile: "../2-helm/prd.yaml"
+  k8s-dashboard:
+    namespace: default
+    enabled: true
+    chart: kubernetes-dashboard/kubernetes-dashboard
+    version: 5.4.1
+    valuesFile: "../2-helm/dashboard/values.yaml"
+    hooks:
+      preInstall: "../2-helm/dashboard/dashboard-admin.yaml"
