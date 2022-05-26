@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: echome
+  pullPolicy: Never
+  tag: "latest"
+
+deployment:
+  ports:
+    - name: http
+      containerPort: 8583
+  env:
+    - name: MESSAGE
+      value: App is deployed using Helm!
+  livenessProbe:
+    httpGet:
+      path: "/check"
+      port: 8583
+  readinessProbe:
+    httpGet:
+      path: "/ready"
+      port: 8583
+
+service:
+  type: NodePort
+  port: 8583
+  nodePort: 30008

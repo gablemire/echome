@@ -1,0 +1,11 @@
+replicaCount: 1
+
+deployment:
+  env:
+    - name: MESSAGE
+      value: App is deployed using Helm in STG!
+
+service:
+  type: NodePort
+  port: 8583
+  nodePort: 30008
