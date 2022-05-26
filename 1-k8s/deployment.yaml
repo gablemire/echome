@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echome
+  labels:
+    app: echome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echome
+  template:
+    metadata:
+      labels:
+        app: echome
+    spec:
+      containers:
+        - name: echome
+          image: echome:latest
+          imagePullPolicy: Never
+          env:
+            - name: MESSAGE
+              value: App is deployed!
+          ports:
+            - containerPort: 8583
+          livenessProbe:
+            httpGet:
+              path: "/check"
+              port: 8583
+          readinessProbe:
+            httpGet:
+              path: "/ready"
+              port: 8583
