@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-sql
+spec:
+  destination:
+    name: ''
+    namespace: db
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 11.1.2
+    chart: mysql
+    helm:
+      releaseName: local-mysql
+      valueFiles:
+        - >-
+          https://raw.githubusercontent.com/gablemire/echome/master/2-helm/mysql/values.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
