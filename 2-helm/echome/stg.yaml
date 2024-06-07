@@ -3,7 +3,7 @@ replicaCount: 1
 deployment:
   env:
     - name: MESSAGE
-      value: App is deployed using Helm in STG!
+      value: App is deployed using Helm in STG 2222!
 
 service:
   type: NodePort
