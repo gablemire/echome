@@ -9,3 +9,5 @@ service:
   type: NodePort
   port: 8583
   nodePort: 30008
+  annotations:
+    link.argocd.argoproj.io/external-link: http://localhost:30008
