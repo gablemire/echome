@@ -12,7 +12,7 @@ primary:
     nodePorts:
       mysql: 30200
   persistence:
-    enabled: true
+    enabled: false
   podLabels:
     service_name: mysql
 initdbScripts:
