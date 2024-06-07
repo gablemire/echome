@@ -8,13 +8,16 @@ This small web app is deployed in Kubernetes using three different techniques:
 2. Helm chart
 3. Helmsman
 
+## Pre-requisites
+- Docker
+- Enable Kubernetes in Docker Desktop
+  - Alternatively, you may use k3d or minikube
+
 ## How to run it locally
 
-- Use Docker Desktop Kubernetes (or Minikube or any other local Kubernetes provider)
-- Create a local image for the `echome` app.
-  - In a shell in the `app` folder, run:
-    ```sh
-    docker build -t echome:latest .
-    ```
+- Create a local image for the `echome` app. You may use the `build.sh` script to do so.
 - Ensure your kubectl points towards your local installation
+  ```sh
+  kubectl config use-context docker-desktop
+  ```
 - Follow the instructions described in each README file under each folder
