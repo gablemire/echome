@@ -1,0 +1,29 @@
+architecture: standalone
+auth:
+  rootPassword: "aHz4Fiof7CfkSnt6UqdP"
+  createDatabase: true
+  database: echome
+  defaultAuthenticationPlugin: "caching_sha2_password"
+primary:
+  # ref: https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15
+  resourcePreset: "nano" # RAM: [256Mi, 384Mi], CPU: [250m, 375m]
+  service:
+    type: NodePort
+    nodePorts:
+      mysql: 30200
+  persistence:
+    enabled: true
+  podLabels:
+    service_name: mysql
+initdbScripts:
+  0000_prepare_db.sql: |-
+    USE `echome`;
+
+    CREATE TABLE IF NOT EXISTS `messages` (
+      `id` INT AUTO_INCREMENT PRIMARY KEY,
+      `message` VARCHAR(255) NOT NULL
+    );
+
+    INSERT INTO `messages` (`message`) VALUES ('Hello, World!');
+    INSERT INTO `messages` (`message`) VALUES ('App is deployed using Helm in PRD!');
+    INSERT INTO `messages` (`message`) VALUES ('This is a test message.');

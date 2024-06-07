@@ -1,8 +1,8 @@
 helmRepos:
-  kubernetes-dashboard: https://kubernetes.github.io/dashboard/
+  bitnami: https://charts.bitnami.com/bitnami
 
 namespaces:
-  default:
+  db:
   stg:
   prd:
 
@@ -12,18 +12,16 @@ apps:
     enabled: true
     chart: ../2-helm/echome
     version: "0.1.0"
-    valuesFile: "../2-helm/stg.yaml"
+    valuesFile: "../2-helm/echome/stg.yaml"
   echome-prd:
     namespace: prd
     enabled: true
     chart: ../2-helm/echome
     version: "0.1.0"
-    valuesFile: "../2-helm/prd.yaml"
-  k8s-dashboard:
-    namespace: default
+    valuesFile: "../2-helm/echome/prd.yaml"
+  local-mysql:
+    namespace: db
     enabled: true
-    chart: kubernetes-dashboard/kubernetes-dashboard
-    version: 5.4.1
-    valuesFile: "../2-helm/dashboard/values.yaml"
-    hooks:
-      preInstall: "../2-helm/dashboard/dashboard-admin.yaml"
+    chart: bitnami/mysql
+    version: "11.1.2"
+    valuesFile: "../2-helm/mysql/values.yaml"
