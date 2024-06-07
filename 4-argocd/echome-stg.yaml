@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: echome-stg
+spec:
+  destination:
+    name: ''
+    namespace: stg
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: 2-helm/echome
+    repoURL: 'https://github.com/gablemire/echome.git'
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+        - stg.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
