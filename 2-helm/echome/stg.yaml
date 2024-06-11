@@ -3,7 +3,7 @@ replicaCount: 1
 deployment:
   env:
     - name: MESSAGE
-      value: App is deployed using Helm in STG!
+      value: App is deployed using ArgoCD in STG!
 
 service:
   type: NodePort
